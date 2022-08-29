@@ -1,0 +1,26 @@
+#!/bin/bash
+##########################
+#
+echo “Backup script”
+#
+##########################
+# Parameters
+#
+DIRNAME=$1
+ALGORITHM=$2
+FILENAME=$3
+#
+# creating the file
+touch $FILENAME
+#
+# creating the directory
+mkdir $DIRNAME
+#
+# Backup using tar
+tar $ALGORITHM $DIRNAME/$FILENAME
+#
+# Encrypting using openssl to “enc” file
+openssl -enc -aes-256-cbc -base64 -in $FILENAME -out enc
+#
+#the error is redirected to the error.log file. I don't know from where to catch the error(( 
+2> error.log
